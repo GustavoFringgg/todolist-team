@@ -1,6 +1,8 @@
 const http = require("http");
 const { v4: uuidv4 } = require("uuid");
+const mongoose = require("mongoose");
 const errHandle = require("./errorHandle");
+const Todo = require("./models/todo");
 const todos = [];
 
 const requestListener = (req, res) => {
