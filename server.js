@@ -7,6 +7,9 @@ const headers = require("./headers");
 const todos = [];
 const postTodo = require("./postTodo");
 const dotenv = require("dotenv");
+const deleteAllTodos = require("./deleteAllTodos");
+const deleteTodo = require("./deleteTodo");
+
 dotenv.config({ path: "./config.env" });
 
 const DB = process.env.DATABASE.replace(
@@ -35,9 +38,9 @@ const requestListener = (req, res) => {
   } else if (req.url == "/todos" && req.method == "POST") {
     postTodo(req, res);
   } else if (req.url == "/todos" && req.method == "DELETE") {
-    // deleteTodo.js
+    deleteAllTodos(req, res);
   } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
-    // deleteTodo.js
+    deleteTodo(req, res);
   } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
     // patchTodo.js
   } else if (req.method == "OPTIONS") {
@@ -57,4 +60,4 @@ const requestListener = (req, res) => {
 
 const server = http.createServer(requestListener);
 server.listen(process.env.PORT || 3000);
-console.log("sever get");
+console.log("server get");
