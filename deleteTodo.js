@@ -2,10 +2,10 @@ const Todo = require("./models/todo");
 const errorHandle = require("./errorHandle");
 const successHandle = require("./successHandle");
 
-function deleteTodo(req, res) {
-  const id = req.url.split("/").pop();
+async function deleteTodo(req, res) {
   try {
-    Todo.findByIdAndDelete(id);
+    const id = req.url.split("/").pop();
+    await Todo.findByIdAndDelete(id);
     successHandle();
   } catch (error) {
     errorHandle(error);
