@@ -6,9 +6,9 @@ async function deleteTodo(req, res) {
   try {
     const id = req.url.split("/").pop();
     await Todo.findByIdAndDelete(id);
-    successHandle();
+    successHandle(res);
   } catch (error) {
-    errorHandle(error);
+    errorHandle(res);
   }
 }
 

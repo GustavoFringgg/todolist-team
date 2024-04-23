@@ -22,7 +22,7 @@ function postTodo(req, res) {
         successHandle(res, new_todo);
       } else errorHandle(res);
     } catch (error) {
-      console.log(error);
+      errorHandle(res);
     }
   });
 }
