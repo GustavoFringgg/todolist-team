@@ -1,5 +1,7 @@
 const http = require("http");
-const { v4: uuidv4 } = require("uuid");
+const {
+  v4: uuidv4
+} = require("uuid");
 const mongoose = require("mongoose");
 const errorHandle = require("./errorHandle");
 const Todo = require("./models/todo");
@@ -9,8 +11,12 @@ const postTodo = require("./postTodo");
 const dotenv = require("dotenv");
 const deleteAllTodos = require("./deleteAllTodos");
 const deleteTodo = require("./deleteTodo");
+const getTodo = require("./getTodo");
+const patchTodo = require("./patchTodo");
 
-dotenv.config({ path: "./config.env" });
+dotenv.config({
+  path: "./config.env"
+});
 
 const DB = process.env.DATABASE.replace(
   "<password>",
@@ -34,7 +40,7 @@ const requestListener = (req, res) => {
   });
 
   if (req.url == "/todos" && req.method == "GET") {
-    // getTodo.js
+    getTodo(req, res)
   } else if (req.url == "/todos" && req.method == "POST") {
     postTodo(req, res);
   } else if (req.url == "/todos" && req.method == "DELETE") {
@@ -42,7 +48,7 @@ const requestListener = (req, res) => {
   } else if (req.url.startsWith("/todos/") && req.method == "DELETE") {
     deleteTodo(req, res);
   } else if (req.url.startsWith("/todos/") && req.method == "PATCH") {
-    // patchTodo.js
+    patchTodo(req, res);
   } else if (req.method == "OPTIONS") {
     res.writeHead(200, headers);
     res.end();
